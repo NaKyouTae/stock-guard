@@ -23,8 +23,9 @@
 ## 기술 스택
 
 ### 서버 (apps/server)
-- NestJS 11, Prisma 7, **MySQL 8**
-- **Prisma 7 주의점** — datasource에 `url` 인라인 불가. 연결 설정은 `prisma.config.ts`(CLI/migrate용)에 두고, `PrismaClient`는 **드라이버 어댑터** 필요. MySQL은 `@prisma/adapter-mariadb` 사용 (연결 문자열 형식: `mysql://...` 또는 mariadb 형식)
+- NestJS 11, Prisma 7, **PostgreSQL (Supabase)**
+- **Prisma 7 주의점** — datasource에 `url` 인라인 불가. 연결 설정은 `prisma.config.ts`(CLI/migrate용)에 두고, `PrismaClient`는 **드라이버 어댑터** 필요. PostgreSQL은 `@prisma/adapter-pg` 사용 (`new PrismaPg({ connectionString })`)
+- **Supabase 연결 구분** — 런타임(앱)은 `DATABASE_URL` = Transaction pooler(포트 **6543**), 마이그레이션/CLI 는 `DIRECT_URL` = direct connection(포트 **5432**). `prisma.config.ts` 는 `DIRECT_URL` 우선 사용
 - **형상관리** — `schema.prisma` 단일 소스 + `prisma/migrations/`를 git 커밋. `prisma migrate dev`(개발) / `prisma migrate deploy`(배포)
 - API 전역 prefix `/api`, DTO 검증(class-validator), CORS(`CORS_ORIGIN`)
 - 인증: JWT (토스 OAuth 연동 기반, 예정)
@@ -32,12 +33,14 @@
 
 ### App 프론트엔드 (apps/app)
 - Next.js 16 (App Router) + React 19 + **Tailwind CSS v4**
+- **폰트: Pretendard** (CDN 동적 서브셋, `globals.css`) — 토스 감성의 핵심
+- **컴포넌트: shadcn/ui 방식** — `components.json` + `cn`(`src/lib/utils.ts`) + cva. 자체 토큰으로 스타일링한 `src/components/ui/*`(Button/Card/Badge). 완제품 룩 대신 headless 위에 직접 스타일. **cva 정의는 `use client` 밖(`button-variants.ts`)에 둬 서버 컴포넌트에서도 `buttonVariants()` 호출 가능**
+- **애니메이션: Motion** (`motion/react`) — `Button` press 스프링, `FadeUp`(`ui/motion.tsx`) 진입 모션
+- 아이콘: **lucide-react**
 - 상태/데이터: TanStack Query (서버 상태, 시세 폴링) *(도입 예정)*
-- 애니메이션: **Motion (Framer Motion)** — 전환/제스처/바텀시트 *(도입 예정)*
-- 컴포넌트: Radix UI(headless) + Vaul(바텀시트) *(도입 예정)*
+- 바텀시트: Vaul *(도입 예정)*
 - 차트: lightweight-charts (주식 캔들/라인) *(도입 예정)*
 - 폼/검증: React Hook Form + Zod *(도입 예정)*
-- 유틸: es-toolkit, overlay-kit (토스 오픈소스) *(도입 예정)*
 
 ## UI 기조 — "토스 증권 느낌"
 

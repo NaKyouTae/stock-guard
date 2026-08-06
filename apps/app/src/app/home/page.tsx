@@ -1,6 +1,11 @@
 import Link from 'next/link';
+import { Search, Heart } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { AuthWidget } from '@/components/auth-widget';
 import { Sparkline } from '@/components/sparkline';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { FadeUp } from '@/components/ui/motion';
 
 type Dir = 'up' | 'down';
 
@@ -82,10 +87,11 @@ export default function HomePage() {
           </nav>
           <div className="ml-auto flex items-center gap-3">
             <div className="hidden items-center gap-2 rounded-xl bg-surface px-3 py-2 text-sm text-muted lg:flex">
-              <span>🔍</span>
+              <Search size={16} />
               <span>종목을 검색하세요</span>
             </div>
             <ThemeToggle />
+            <AuthWidget />
           </div>
         </div>
       </header>
@@ -105,33 +111,33 @@ export default function HomePage() {
 
         {/* 지수 카드 */}
         <section className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-          {INDICES.map((idx) => (
-            <div key={idx.name} className="rounded-2xl bg-surface p-4">
-              <div className="flex items-start justify-between gap-2">
-                <span className="text-sm font-semibold leading-tight">
-                  {idx.name}
-                </span>
-                {idx.tag && (
-                  <span className="shrink-0 rounded-md bg-background px-1.5 py-0.5 text-[11px] text-muted">
-                    {idx.tag}
+          {INDICES.map((idx, i) => (
+            <FadeUp key={idx.name} delay={i * 0.03}>
+              <Card>
+                <div className="flex items-start justify-between gap-2">
+                  <span className="text-sm font-semibold leading-tight">
+                    {idx.name}
                   </span>
-                )}
-              </div>
-              <Sparkline
-                data={idx.spark}
-                direction={idx.dir}
-                className="my-2.5 h-8 w-full"
-              />
-              <div className="text-lg font-bold tabular-nums">{idx.price}</div>
-              <div className={`text-sm font-medium tabular-nums ${color(idx.dir)}`}>
-                {idx.change} ({idx.pct})
-              </div>
-            </div>
+                  {idx.tag && <Badge className="shrink-0">{idx.tag}</Badge>}
+                </div>
+                <Sparkline
+                  data={idx.spark}
+                  direction={idx.dir}
+                  className="my-2.5 h-8 w-full"
+                />
+                <div className="text-lg font-bold tabular-nums">{idx.price}</div>
+                <div
+                  className={`text-sm font-medium tabular-nums ${color(idx.dir)}`}
+                >
+                  {idx.change} ({idx.pct})
+                </div>
+              </Card>
+            </FadeUp>
           ))}
         </section>
 
         {/* 실시간 차트 */}
-        <section className="mt-8">
+        <FadeUp delay={0.1} className="mt-8">
           <div className="flex items-center gap-5 border-b border-black/5 text-[15px] dark:border-white/10">
             {TABS.map((tab, i) => (
               <button
@@ -195,7 +201,7 @@ export default function HomePage() {
                   >
                     <td className="py-3 pr-2">
                       <div className="flex items-center gap-2.5">
-                        <span className="text-muted">♡</span>
+                        <Heart size={16} className="text-muted" />
                         <span className="w-4 text-center text-muted tabular-nums">
                           {s.rank}
                         </span>
@@ -233,7 +239,7 @@ export default function HomePage() {
               </tbody>
             </table>
           </div>
-        </section>
+        </FadeUp>
       </main>
 
       {/* 하단 티커 */}

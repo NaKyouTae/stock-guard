@@ -1,16 +1,21 @@
 import Link from 'next/link';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { AuthWidget } from '@/components/auth-widget';
+import { FadeUp } from '@/components/ui/motion';
+import { buttonVariants } from '@/components/ui/button-variants';
+import { cn } from '@/lib/utils';
 
 export default function Home() {
   return (
     <main className="min-h-dvh bg-background">
       <div className="mx-auto flex min-h-dvh max-w-5xl flex-col px-6 py-8 sm:px-10 lg:px-16">
-        <header className="flex justify-end">
+        <header className="flex items-center justify-end gap-3">
           <ThemeToggle />
+          <AuthWidget />
         </header>
 
         <div className="flex flex-1 flex-col justify-center">
-          <div className="max-w-2xl">
+          <FadeUp className="max-w-2xl">
             <span className="text-5xl sm:text-6xl">🛡️</span>
             <h1 className="mt-6 text-3xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
               Stock Guard
@@ -22,11 +27,14 @@ export default function Home() {
 
             <Link
               href="/home"
-              className="mt-8 inline-flex h-14 w-full items-center justify-center rounded-2xl bg-primary text-base font-semibold text-white transition-transform active:scale-[0.99] sm:w-auto sm:px-12"
+              className={cn(
+                buttonVariants({ size: 'lg' }),
+                'mt-8 w-full transition-transform active:scale-[0.99] sm:w-auto sm:px-12',
+              )}
             >
               시작하기
             </Link>
-          </div>
+          </FadeUp>
         </div>
       </div>
     </main>

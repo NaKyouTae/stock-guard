@@ -16,7 +16,7 @@
 ## 아키텍처
 
 ```
-[Next.js 프론트] ──BFF/프록시──> [NestJS 백엔드] ──Prisma──> [MySQL]
+[Next.js 프론트] ──BFF/프록시──> [NestJS 백엔드] ──Prisma──> [PostgreSQL (Supabase)]
       │                                                        │
    웹 우선 → 추후 웹뷰(모바일)                          Prisma Migrate (형상관리)
 ```
@@ -45,12 +45,12 @@
 | 외부 연동 | 토스증권 오픈 API (시세/잔고/주문) |
 | 인증 | JWT (토스 OAuth 연동 기반) |
 
-### Database — MySQL + ORM + 형상관리
+### Database — PostgreSQL (Supabase) + ORM + 형상관리
 
 | 구분 | 선택 | 이유 |
 |------|------|------|
-| DB | MySQL 8 | — |
-| ORM | Prisma 7 | 타입 안전, MySQL 완전 지원 |
+| DB | PostgreSQL (Supabase) | 관리형 Postgres, 인증/스토리지 등 확장 용이 |
+| ORM | Prisma 7 (`@prisma/adapter-pg`) | 타입 안전, PostgreSQL 완전 지원 |
 | 형상관리 | Prisma Migrate | `schema.prisma` 단일 소스 → 마이그레이션 SQL을 git으로 이력 관리 |
 
 ## 프로젝트 구조 (Turborepo · pnpm)

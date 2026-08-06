@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+/* Pretendard — 토스 감성의 핵심 폰트 (동적 서브셋: 사용 글리프만 로드) */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css');
 
 :root {
   --background: #ffffff;
@@ -54,8 +56,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family:
-    -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Pretendard',
-    system-ui, sans-serif;
+    'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+    'Apple SD Gothic Neo', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   /* 웹뷰 안전영역 대응 */
   padding-top: env(safe-area-inset-top);

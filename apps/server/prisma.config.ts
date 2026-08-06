@@ -7,6 +7,8 @@ export default defineConfig({
     path: 'prisma/migrations',
   },
   datasource: {
-    url: process.env['DATABASE_URL'],
+    // 마이그레이션/CLI 는 Supabase direct connection(5432)을 사용해야 한다.
+    // (Transaction pooler 6543 으로는 migrate 불가) — 없으면 DATABASE_URL 로 폴백.
+    url: process.env['DIRECT_URL'] ?? process.env['DATABASE_URL'],
   },
 });
