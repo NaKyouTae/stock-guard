@@ -53,18 +53,44 @@
 | ORM | Prisma 7 | 타입 안전, MySQL 완전 지원 |
 | 형상관리 | Prisma Migrate | `schema.prisma` 단일 소스 → 마이그레이션 SQL을 git으로 이력 관리 |
 
-## 프로젝트 구조 (pnpm 모노레포)
+## 프로젝트 구조 (Turborepo · pnpm)
 
 ```
 stock-guard/
-├── app/          # Next.js — 사용자 웹 (추후 웹뷰)
-├── server/       # NestJS — API
-│   └── prisma/
-│       ├── schema.prisma      # 스키마 단일 소스
-│       └── migrations/        # 마이그레이션 이력 (형상관리)
-├── admin/        # (선택) 관리자
-└── pnpm-workspace.yaml
+├── apps/
+│   ├── app/          # Next.js — 사용자 웹 (추후 웹뷰) · Vercel 배포
+│   └── server/       # NestJS — API · Cloudtype 배포
+│       ├── prisma/
+│       │   ├── schema.prisma   # 스키마 단일 소스
+│       │   └── migrations/     # 마이그레이션 이력 (형상관리)
+│       └── prisma.config.ts    # Prisma 7 CLI 설정 (DATABASE_URL)
+├── turbo.json
+├── pnpm-workspace.yaml
+└── package.json
 ```
+
+## 실행
+
+```bash
+pnpm install                    # 의존성 설치
+pnpm --filter server prisma:generate  # Prisma Client 생성
+
+pnpm dev            # app + server 동시 실행 (turbo)
+pnpm dev:app        # 프론트만 (http://localhost:15000)
+pnpm dev:server     # 서버만 (http://localhost:18090/api)
+pnpm build          # 전체 빌드
+```
+
+`.env`는 각 앱의 `.env.example`을 복사해 설정합니다.
+
+## 배포
+
+| 앱 | 플랫폼 | 설정 |
+|----|--------|------|
+| `apps/app` | **Vercel** | Root Directory = `apps/app` (Next.js 자동 감지) |
+| `apps/server` | **Cloudtype** | Root = `apps/server`, build: `pnpm build`, start: `pnpm start:prod` |
+
+DB 마이그레이션은 배포 시 `pnpm --filter server prisma:deploy`로 적용합니다.
 
 ## 참고 (검토 필요 사항)
 

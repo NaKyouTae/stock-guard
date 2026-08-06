@@ -1,0 +1,39 @@
+@import 'tailwindcss';
+
+:root {
+  --background: #ffffff;
+  --foreground: #191f28; /* 토스 텍스트 톤 */
+  --muted: #8b95a1;
+  --primary: #3182f6; /* 토스 블루 */
+  --surface: #f2f4f6;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-surface: var(--surface);
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--surface);
+  color: var(--foreground);
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Pretendard',
+    system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  /* 웹뷰 안전영역 대응 */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
