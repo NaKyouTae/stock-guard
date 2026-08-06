@@ -46,6 +46,7 @@
 - **반응형 (웹·태블릿·모바일 모두 지원)** — 모바일 고정 폭 금지. Tailwind 브레이크포인트(`sm:` `md:` `lg:`)로 화면별 레이아웃 구성. 콘텐츠는 `max-w-*` + `mx-auto`로 큰 화면에서 가독폭 유지. **`max-w-[430px]` 같은 하드 고정 컨테이너 사용 금지**
 - **모바일 우선 작성(mobile-first)** — 기본 스타일은 모바일 기준, 위로 올려가며 확장. 단 데스크톱/태블릿 레이아웃도 반드시 함께 고려
 - **컬러 톤** — 토스 블루 `#3182f6`(primary), 텍스트 `#191f28`, muted `#8b95a1`, surface `#f2f4f6`, background `#ffffff`. CSS 변수로 관리(`globals.css`)
+- **다크 모드 지원** — 색상은 항상 시맨틱 토큰(`bg-background` `text-foreground` `text-muted` `bg-surface` `bg-primary`)으로 쓸 것. **하드코딩 색상 금지** (다크 대응 깨짐). 다크 토큰은 `globals.css`에서 `@media (prefers-color-scheme: dark)`로 시스템 자동 전환 + `:root[data-theme='dark'|'light']`로 수동 토글 훅 제공. 다크 배경 `#17171c`, primary `#4593fc`
 - **폰트** — Apple SD Gothic Neo / Pretendard 계열
 - **인터랙션** — 버튼 `active:scale`, 스프링 전환, 숫자 카운트업 등 "쫀득함"이 핵심 → Motion 적극 활용
 - **웹뷰/모바일 대비 규칙**

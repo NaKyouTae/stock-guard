@@ -8,6 +8,26 @@
   --surface: #f2f4f6;
 }
 
+/* 다크 모드 — 시스템 설정 기반 (수동 지정이 없을 때) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --background: #17171c;
+    --foreground: #f2f4f6;
+    --muted: #6b7684;
+    --primary: #4593fc;
+    --surface: #26282c;
+  }
+}
+
+/* 수동 토글 (data-theme 우선) */
+:root[data-theme='dark'] {
+  --background: #17171c;
+  --foreground: #f2f4f6;
+  --muted: #6b7684;
+  --primary: #4593fc;
+  --surface: #26282c;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

@@ -10,7 +10,10 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover', // 웹뷰 안전영역 대응 (확대는 허용 — 접근성)
-  themeColor: '#ffffff',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#17171c' },
+  ],
 };
 
 export default function RootLayout({
