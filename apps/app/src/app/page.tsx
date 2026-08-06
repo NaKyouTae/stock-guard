@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { ThemeToggle } from '@/components/theme-toggle';
 
 export default function Home() {
@@ -19,12 +20,12 @@ export default function Home() {
               AI가 다음 투자를 추천하고 하락장에서 내 자산을 지켜주는 주식 파트너
             </p>
 
-            <button
-              type="button"
-              className="mt-8 h-14 w-full rounded-2xl bg-primary text-base font-semibold text-white transition-transform active:scale-[0.99] sm:w-auto sm:px-12"
+            <Link
+              href="/home"
+              className="mt-8 inline-flex h-14 w-full items-center justify-center rounded-2xl bg-primary text-base font-semibold text-white transition-transform active:scale-[0.99] sm:w-auto sm:px-12"
             >
               시작하기
-            </button>
+            </Link>
           </div>
         </div>
       </div>
