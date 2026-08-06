@@ -43,17 +43,18 @@
 
 **핵심 철학: 무거운 UI 라이브러리를 쓰지 않고, 커스텀 디자인 시스템 + 극도로 매끄러운 마이크로 인터랙션으로 완성한다.** (완제품 컴포넌트 라이브러리를 그대로 쓰면 토스 느낌이 나지 않음 → Radix 같은 headless 위에 직접 스타일링)
 
-- **모바일 우선** — 웹 우선으로 개발하되 추후 웹뷰로 감쌀 것. 중앙 고정 컨테이너 `max-w-[430px]`
-- **컬러 톤** — 토스 블루 `#3182f6`(primary), 텍스트 `#191f28`, muted `#8b95a1`, surface `#f2f4f6`. CSS 변수로 관리(`globals.css`)
+- **반응형 (웹·태블릿·모바일 모두 지원)** — 모바일 고정 폭 금지. Tailwind 브레이크포인트(`sm:` `md:` `lg:`)로 화면별 레이아웃 구성. 콘텐츠는 `max-w-*` + `mx-auto`로 큰 화면에서 가독폭 유지. **`max-w-[430px]` 같은 하드 고정 컨테이너 사용 금지**
+- **모바일 우선 작성(mobile-first)** — 기본 스타일은 모바일 기준, 위로 올려가며 확장. 단 데스크톱/태블릿 레이아웃도 반드시 함께 고려
+- **컬러 톤** — 토스 블루 `#3182f6`(primary), 텍스트 `#191f28`, muted `#8b95a1`, surface `#f2f4f6`, background `#ffffff`. CSS 변수로 관리(`globals.css`)
 - **폰트** — Apple SD Gothic Neo / Pretendard 계열
 - **인터랙션** — 버튼 `active:scale`, 스프링 전환, 숫자 카운트업 등 "쫀득함"이 핵심 → Motion 적극 활용
-- **웹뷰 대비 필수 규칙**
+- **웹뷰/모바일 대비 규칙**
   - `100dvh` 사용 (100vh 버그 회피)
   - `env(safe-area-inset-*)` 안전영역 대응 (노치/홈바)
-  - 터치 타깃 44px 이상, hover 의존 금지
+  - 터치 타깃 44px 이상, hover 의존 금지 (모바일)
   - input font-size 16px 이상 (iOS 포커스 확대 방지)
   - `-webkit-tap-highlight-color: transparent`
-  - viewport `maximum-scale=1, viewport-fit=cover`
+  - viewport `viewport-fit=cover` (확대는 허용 — 접근성)
 
 ## 컨벤션
 
@@ -61,7 +62,7 @@
 - **커서 기반 페이지네이션** 지향 (대량 거래/보유 내역)
 - **BFF 프록시 패턴** — 프론트 API Routes → NestJS (httpOnly 쿠키 JWT)
 - **보험/소유이력류 외부 데이터는 자체 DB 저장 지양**, 실시간 조회 (해당 시)
-- 반응형 브레이크포인트(md:/lg:) 사용 지양 — 모바일 뷰포트 기준
+- **반응형 필수** — 웹/태블릿/모바일 모두 지원. `sm:`/`md:`/`lg:` 브레이크포인트 활용 (자세한 건 UI 기조 참고)
 
 ## 실행
 

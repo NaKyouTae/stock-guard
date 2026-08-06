@@ -9,8 +9,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  viewportFit: 'cover',
+  viewportFit: 'cover', // 웹뷰 안전영역 대응 (확대는 허용 — 접근성)
   themeColor: '#ffffff',
 };
 
@@ -19,12 +18,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko">
-      <body>
-        {/* 모바일 우선 · 웹뷰 대비 중앙 고정 컨테이너 */}
-        <div className="mx-auto min-h-dvh w-full max-w-[430px] bg-background">
-          {children}
-        </div>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
