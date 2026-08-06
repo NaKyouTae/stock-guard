@@ -37,10 +37,16 @@
 | muted | `text-muted` | `#8b95a1` | `#6b7684` | 보조 텍스트 |
 | surface | `bg-surface` | `#f2f4f6` | `#26282c` | 카드/영역 배경 |
 | primary | `bg-primary` / `text-primary` | `#3182f6` | `#4593fc` | 강조·CTA (토스 블루) |
+| up | `text-up` | `#f04452` | `#f0616d` | **상승/플러스 (빨강)** |
+| down | `text-down` | `#3182f6` | `#4593fc` | **하락/마이너스 (파랑)** |
 
 - 토큰 정의: `apps/app/src/app/globals.css` (`:root` + `@theme inline`)
 - primary 위 텍스트는 `text-white` 고정 (양쪽 모드 모두 대비 확보됨).
 - 신규 색이 필요하면 임의 HEX 대신 **토큰을 추가**한다 (globals.css 3곳: 기본 `:root`, 다크 media, 다크 `data-theme`).
+
+### 등락 색상 — 한국식 (중요)
+
+**국내 증권 관례를 따른다: 상승 = 빨강(`up`), 하락 = 파랑(`down`).** (미국식과 반대) 주가·등락률·지수 변동은 반드시 `text-up`/`text-down` 토큰으로 표기한다. 스파크라인/차트 선색도 동일. 부호(+/−)도 함께 노출해 색맹 접근성 확보.
 
 ## 4. 다크 모드
 

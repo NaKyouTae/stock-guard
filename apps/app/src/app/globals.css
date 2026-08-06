@@ -6,6 +6,8 @@
   --muted: #8b95a1;
   --primary: #3182f6; /* 토스 블루 */
   --surface: #f2f4f6;
+  --up: #f04452; /* 상승 — 한국식: 빨강 */
+  --down: #3182f6; /* 하락 — 한국식: 파랑 */
 }
 
 /* 다크 모드 — 시스템 설정 기반 (수동 지정이 없을 때) */
@@ -16,6 +18,8 @@
     --muted: #6b7684;
     --primary: #4593fc;
     --surface: #26282c;
+    --up: #f0616d;
+    --down: #4593fc;
   }
 }
 
@@ -26,6 +30,8 @@
   --muted: #6b7684;
   --primary: #4593fc;
   --surface: #26282c;
+  --up: #f0616d;
+  --down: #4593fc;
 }
 
 @theme inline {
@@ -34,6 +40,8 @@
   --color-muted: var(--muted);
   --color-primary: var(--primary);
   --color-surface: var(--surface);
+  --color-up: var(--up);
+  --color-down: var(--down);
 }
 
 html,
