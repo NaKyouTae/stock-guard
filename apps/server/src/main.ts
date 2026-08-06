@@ -20,7 +20,7 @@ async function bootstrap() {
   });
 
   // Cloudtype은 PORT 환경변수를 주입한다
-  const port = process.env.PORT ?? 18090;
+  const port = process.env.PORT ?? 18070;
   await app.listen(port);
   console.log(`🛡️  Stock Guard API on http://localhost:${port}/api`);
 }

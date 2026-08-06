@@ -76,8 +76,8 @@ pnpm install                    # 의존성 설치
 pnpm --filter server prisma:generate  # Prisma Client 생성
 
 pnpm dev            # app + server 동시 실행 (turbo)
-pnpm dev:app        # 프론트만 (http://localhost:15000)
-pnpm dev:server     # 서버만 (http://localhost:18090/api)
+pnpm dev:app        # 프론트만 (http://localhost:16000)
+pnpm dev:server     # 서버만 (http://localhost:18070/api)
 pnpm build          # 전체 빌드
 ```
 
